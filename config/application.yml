@@ -1,0 +1,3 @@
+url:
+  feedGMA: "https://data-global-nv.feedgma.com/mix5/get-watchlist?SID=sid&UID=123&RT=303&L=EN&M=1&H=1&UNC=0&SRC=ADSM"
+  feedGMA_global: "http://data.feedgma.com/mix2/ClientServiceProvider?SID=sid&UID=123&RT=303&L=EN&M=1&H=1&UNC=0&SRC=ADSM"
