@@ -1,26 +1,20 @@
 package com.project.validation.service;
 
-import com.project.validation.helpers.DataSourceManageHelper;
 import com.project.validation.model.DataSource;
-import com.project.validation.model.TD;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DataProcessService {
 
     private List<String> types = new ArrayList<>();
-
     @Autowired
-    DataSourceManageHelper dataSourceManageHelper;
+    AddDataToSourceService addDataToSourceService;
     @Autowired
     DataComparisonService dataComparisonService;
     @Autowired
@@ -39,20 +33,18 @@ public class DataProcessService {
             String[] singleData = value.split("\\|");
 
             String key = singleData[0] + "@" + singleData[1];
-            System.out.println(singleData.length);
-//            System.out.println(Arrays.toString(singleData));
 
+            System.out.println(key +"<-" +type);
 
-//            dataSourceManageHelper.addData(type,key,valueObject);
-            dataSourceManageHelper.testAdd(type,key);
+            addDataToSourceService.addData(type,key,value);
+
         }
-
-//        dataComparisonService.comparison(dataSource.getTD(), dataSource.getTD_global());
         System.out.println("======================================================================================");
-        dataComparisonService.testComparison(dataSource.getTD_test(),dataSource.getTD_global_test());
-//        dataSourceManageHelper.size();
+        dataComparisonService.comparisonTask(dataSource.getTD(),dataSource.getTD_global());
+        System.out.println(dataSource.getSuccessData().size() + "<- success");
+        System.out.println(dataSource.getMissMatchData().size() + "<- miss");
+        System.out.println(dataSource.getNotFoundData().size() + "<- not found");
 
-//        dataSourceManageHelper.size();
     }
 
     private void getDataTypes() {

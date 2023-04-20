@@ -12,29 +12,26 @@ import java.util.Map;
 
 @Service
 public class DataFetchClientService {
-//    ConfigureUrl configureUrl = new ConfigureUrl();
 
     @Autowired
     DataProcessService dataProcessService;
     @Autowired
-    ObjectMapper objectMapper;
-    @Autowired
     URLSource dataSource;
     RestTemplate restTemplate = new RestTemplate();
 
-    public void getData(){
+    public void getData() {
 
-        Map<String,String> urlMap = dataSource.getUrlMap();
+        Map<String, String> urlMap = dataSource.getUrlMap();
 
-        for (String key:urlMap.keySet()) {
+        for (String key : urlMap.keySet()) {
             String resourceUrl = urlMap.get(key);
 
             ResponseEntity<String> response
                     = restTemplate.getForEntity(resourceUrl, String.class);
 
-            JSONObject responseBodyJSONObject =(new JSONObject(response.getBody())).getJSONObject("DAT");
+            JSONObject responseBodyJSONObject = (new JSONObject(response.getBody())).getJSONObject("DAT");
 
-            dataProcessService.processResponse(responseBodyJSONObject,key);
+            dataProcessService.processResponse(responseBodyJSONObject, key);
 
         }
 

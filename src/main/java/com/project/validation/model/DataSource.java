@@ -15,6 +15,7 @@ public class DataSource {
     Map<String,String> TD_global = new HashMap<>();
     Map<String,String> missMatchData = new HashMap<>();
     Map<String,String> notFoundData = new HashMap<>();
+    Map<String,String> successData = new HashMap<>();
 
     List<String> TD_test = new ArrayList<>();
     List<String> TD_global_test = new ArrayList<>();
