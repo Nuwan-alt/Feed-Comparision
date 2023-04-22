@@ -17,10 +17,10 @@ public class DataComparisonService {
         compareMap(map2,map1);
     }
     private void compareMap(Map<String,String> map1, Map<String,String> map2){
-        int co = 0;
+
         for (String key:map1.keySet()) {
 
-            ++co;
+
             String valueInMap1 = map1.get(key);
 
             if(map2.containsKey(key)){
@@ -29,13 +29,13 @@ public class DataComparisonService {
 
                 if(valueInMap1.equals(valueInMap2)){
                     addItemToMap(dataSource.getSuccessData(),key,valueInMap1);
-                    System.out.println("success " + co);
+//                    System.out.println("success " );
                 }else {
-                    System.out.println("failed " + co);
+//                    System.out.println("failed " );
                     addItemToMap(dataSource.getMissMatchData(),key,valueInMap1);
                 }
             }else {
-                System.out.println("not match "  + co);
+//                System.out.println("not match " );
                 addItemToMap(dataSource.getNotFoundData(),key,valueInMap1 );
 
             }
