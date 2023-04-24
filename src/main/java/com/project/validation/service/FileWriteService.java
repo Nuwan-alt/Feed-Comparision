@@ -11,10 +11,11 @@ import java.util.Map;
 
 @Service
 public class FileWriteService {
-    @Bean
-    private void createFile() {
+
+    public void createFile(String fileName) {
+        String filePath = "./resources/reports/"+fileName+".txt";
         try {
-            File myObj = new File("./resources/reports/filename.txt");
+            File myObj = new File(filePath);
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
             } else {
@@ -32,11 +33,12 @@ public class FileWriteService {
                           Map<String,String> td_global,
                           Map<String,String> match,
                           Map<String,String> mismatch,
-                          Map<String,String> notFound
+                          Map<String,String> notFound,
+                          String fileName
     )
     {
         try {
-            FileWriter myWriter = new FileWriter("./resources/reports/filename.txt");
+            FileWriter myWriter = new FileWriter("./resources/reports/"+fileName+".txt");
             myWriter.write("Number of data coming from data.feedgma.com : " + td.size()+"\n");
             myWriter.write("Number of data coming from data-global-nv.feedgma.com : " +td_global.size()+"\n");
             myWriter.write("Number of data comparison success : " + match.size() +"\n");

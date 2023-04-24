@@ -9,6 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -45,6 +50,8 @@ public class DataFetchClientService {
         }
 
         System.out.println("======================================================================================");
+        String fileName = (new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")).format(new Date());
+        System.out.println(fileName);
         dataComparisonService.comparisonTask(dataSource.getTD(),dataSource.getTD_global());
         System.out.println(dataSource.getSuccessData().size() + "<- success");
         System.out.println(dataSource.getMissMatchData().size() + "<- miss");
@@ -55,11 +62,15 @@ public class DataFetchClientService {
 //        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 //        System.out.println(dataSource.getTD());
 
+//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+        fileWriteService.createFile(fileName);
         fileWriteService.writeFile(dataSource.getTD(),
                 dataSource.getTD_global(),
                 dataSource.getSuccessData(),
                 dataSource.getMissMatchData(),
-                dataSource.getNotFoundData());
+                dataSource.getNotFoundData(),
+                fileName);
     }
 
 
